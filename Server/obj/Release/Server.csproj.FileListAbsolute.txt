@@ -1,0 +1,7 @@
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\bin\ApplicationInsights.config
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\bin\Server.dll.config
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\bin\Server.dll
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\bin\Server.pdb
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\obj\Release\Server.dll
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\obj\Release\Server.pdb
+c:\users\pepsi\documents\visual studio 2015\Projects\ClientWpf\Server\obj\Release\Server.csprojResolveAssemblyReference.cache
