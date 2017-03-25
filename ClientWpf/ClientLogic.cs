@@ -14,8 +14,6 @@ using System.Threading;
 
 namespace ClientWpf
 {
-    //[CallbackBehavior(
-    //    UseSynchronizationContext = false)]
     public class ClientLogic : Window, IChatCallback
     {
         #region fields
@@ -47,11 +45,6 @@ namespace ClientWpf
         }
 
         static ChatClient proxy = null;
-        //static DuplexChannelFactory<IChat> myChannelFactory;
-        //EndpointAddress myEndpoint;
-        //WSDualHttpBinding myBinding;
-
-        //static ChatClient client;
 
         #region public methods for client side
         /// <summary>
@@ -63,11 +56,6 @@ namespace ClientWpf
             {
                 InstanceContext context = new InstanceContext(new ClientLogic());
                 proxy = new ChatClient(context);
-
-                    proxy.Open();
-                    MessageBox.Show(proxy.State.ToString());
-                    proxy.Test("tetas");
-               
             }
 
             catch (Exception ex)
@@ -84,22 +72,7 @@ namespace ClientWpf
         /// </summary>
         public void OpenProxy()
         {
-            //try
-            //{
-            //    if (proxy.State != CommunicationState.Opened)
-            //    {
-                    
-
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.StackTrace);
-            //    MessageBox.Show(ex.Message);
-            //    MessageBox.Show(ex.Data.ToString());
-            //    MessageBox.Show(ex.GetType().ToString());
-            //}
-
+            proxy.Open();
         }
 
         /// <summary>
@@ -172,7 +145,6 @@ namespace ClientWpf
             });
         }
         #endregion
-
 
         #region callback methods
 

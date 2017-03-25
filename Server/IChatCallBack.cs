@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Server
 {
     
-    interface IChatCallBack
+   public interface IChatCallBack
     {
         /// <summary>
         /// Get the message and adding it to the chat history text box.

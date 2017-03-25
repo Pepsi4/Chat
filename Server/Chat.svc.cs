@@ -10,14 +10,21 @@ using System.Threading;
 
 namespace Server
 {
+    
 
     #region exceptions
     public class CallBackIsNotUnic : Exception { }
     public class NameIsNotUnic : Exception { }
     #endregion
 
+    
+
     public class Server : IChat
     {
+        //TODO: max connetions sets in code
+        public static int MaxConnectnios { get; set; } = 5;
+        public static int CurrentConnections { get; set; } = 0;
+
         static Dictionary<IChatCallBack, string> _userNames =
         new Dictionary<IChatCallBack, string>();
 
@@ -25,7 +32,7 @@ namespace Server
         {
             var callback =
             OperationContext.Current.GetCallbackChannel<IChatCallBack>();
-            
+
             callback.ErrorMessage(msg);
         }
 
@@ -57,10 +64,15 @@ namespace Server
                 return false;
             }
 
-            AddUser(userName);
+            LogginUser(userName);
             return true;
         }
 
+        /// <summary>
+        /// Returns true if we haven't this name in main the dictionary.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         private bool IsNameUnic(string userName)
         {
             if (_userNames.ContainsValue(userName))
@@ -71,6 +83,11 @@ namespace Server
             return true;
         }
 
+        /// <summary>
+        /// Returns true if we haven't this callback(context) in the main dictionary.
+        /// </summary>
+        /// <param name="callback"></param>
+        /// <returns></returns>
         private bool IsCallBackUnic(IChatCallBack callback)
         {
             if (_userNames.ContainsKey(callback))
@@ -81,12 +98,21 @@ namespace Server
             return true;
         }
 
+
+
+        //todo: method that cheks is user online or not
         /// <summary>
         /// Deletes from the our dictionary the callback and username.
         /// </summary>
-        public void UnLoggin()
+        public void UnLogginUser(IChatCallBack callback)
         {
-            //_userNames.Remove();
+            _userNames.Remove(callback);
+            CurrentConnections--;
+        }
+
+        public int GetConnetionsCount()
+        {
+            return CurrentConnections;
         }
 
         /// <summary>
@@ -99,17 +125,16 @@ namespace Server
 
             foreach (IChatCallBack keyValue in _userNames.Keys)
             {
-
                 ThreadPool.QueueUserWorkItem(s =>
                 {
                     try
                     {
                         keyValue.GetMessage(msg);
                     }
-                            //If we cann't to connect to the current client.
-                            catch (TimeoutException)
+                    //If we cann't to connect to the current client.
+                    catch (TimeoutException)
                     {
-                        callback.ErrorMessage("time out exc");
+                        callback.ErrorMessage("Time out. Try again later.");
                     }
                 });
             }
@@ -118,7 +143,7 @@ namespace Server
         /// <summary>
         /// If the user joined. Adds to the dictionary username and callback. Server side.
         /// </summary>
-        public void AddUser(string userName)
+        public void LogginUser(string userName)
         {
             try
             {
@@ -128,6 +153,7 @@ namespace Server
                 try
                 {
                     _userNames.Add(callback, userName);
+                    CurrentConnections++;
                 }
                 catch (TimeoutException) { }
                 catch (CommunicationObjectAbortedException) { }
