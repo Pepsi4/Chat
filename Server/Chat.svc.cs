@@ -10,31 +10,24 @@ using System.Threading;
 
 namespace Server
 {
-    
+
 
     #region exceptions
     public class CallBackIsNotUnic : Exception { }
     public class NameIsNotUnic : Exception { }
     #endregion
 
-    
-
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Server : IChat
     {
         //TODO: max connetions sets in code
-        public static int MaxConnectnios { get; set; } = 5;
-        public static int CurrentConnections { get; set; } = 0;
+        
+        public int MaxConnections { get; set; } = 5;
+        
+        public int CurrentConnections { get; set; } = 0;
 
         static Dictionary<IChatCallBack, string> _userNames =
         new Dictionary<IChatCallBack, string>();
-
-        public void Test(string msg)
-        {
-            var callback =
-            OperationContext.Current.GetCallbackChannel<IChatCallBack>();
-
-            callback.ErrorMessage(msg);
-        }
 
         /// <summary>
         /// Checks if the element with the key is already exists. Or any others problems with the name.
@@ -97,10 +90,8 @@ namespace Server
 
             return true;
         }
-
-
-
-        //todo: method that cheks is user online or not
+        
+        //todo: method that checks is user online or not
         /// <summary>
         /// Deletes from the our dictionary the callback and username.
         /// </summary>
@@ -110,9 +101,22 @@ namespace Server
             CurrentConnections--;
         }
 
-        public int GetConnetionsCount()
+        /// <summary>
+        /// Gets count of current connetions.
+        /// </summary>
+        /// <returns></returns>
+        public int GetConnectionsCount()
         {
             return CurrentConnections;
+        }
+
+        /// <summary>
+        /// Retruns the value of max connections to the server what is possible.
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxConnetionsNumber()
+        {
+            return MaxConnections;
         }
 
         /// <summary>

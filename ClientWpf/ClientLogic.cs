@@ -144,6 +144,33 @@ namespace ClientWpf
 
             });
         }
+
+        /// <summary>
+        /// Get count of connections to the server.
+        /// </summary>
+        /// <returns></returns>
+        public int GetConnectionsCounter()
+        {
+            return proxy.GetConnectionsCount();
+        }
+
+        /// <summary>
+        /// Get value of max connections to the server.
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxConnetionsNumber()
+        {
+            return proxy.GetMaxConnetionsNumber();
+        }
+
+        /// <summary>
+        /// Returns the string value of the current connection.
+        /// </summary>
+        /// <returns></returns>
+        public string GetConnetionState()
+        {
+            return proxy.State.ToString();
+        }
         #endregion
 
         #region callback methods

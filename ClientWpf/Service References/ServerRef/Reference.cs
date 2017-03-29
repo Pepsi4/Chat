@@ -15,17 +15,20 @@ namespace ClientWpf.ServerRef {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServerRef.IChat", CallbackContract=typeof(ClientWpf.ServerRef.IChatCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IChat {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/Test")]
-        void Test(string message);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/AddUser")]
-        void AddUser(string name);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/LogginUser")]
+        void LogginUser(string name);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SendMessageToAll")]
         void SendMessageToAll(string message);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/CheckUser", ReplyAction="http://tempuri.org/IChat/CheckUserResponse")]
         bool CheckUser(string userName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/GetConnectionsCount", ReplyAction="http://tempuri.org/IChat/GetConnectionsCountResponse")]
+        int GetConnectionsCount();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/GetMaxConnetionsNumber", ReplyAction="http://tempuri.org/IChat/GetMaxConnetionsNumberResponse")]
+        int GetMaxConnetionsNumber();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -78,12 +81,8 @@ namespace ClientWpf.ServerRef {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void Test(string message) {
-            base.Channel.Test(message);
-        }
-        
-        public void AddUser(string name) {
-            base.Channel.AddUser(name);
+        public void LogginUser(string name) {
+            base.Channel.LogginUser(name);
         }
         
         public void SendMessageToAll(string message) {
@@ -92,6 +91,14 @@ namespace ClientWpf.ServerRef {
         
         public bool CheckUser(string userName) {
             return base.Channel.CheckUser(userName);
+        }
+        
+        public int GetConnectionsCount() {
+            return base.Channel.GetConnectionsCount();
+        }
+        
+        public int GetMaxConnetionsNumber() {
+            return base.Channel.GetMaxConnetionsNumber();
         }
     }
 }

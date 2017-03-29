@@ -16,11 +16,8 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IChat_Test_InputMessage">
-    <wsdl:part name="parameters" element="tns:Test" />
-  </wsdl:message>
-  <wsdl:message name="IChat_AddUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddUser" />
+  <wsdl:message name="IChat_LogginUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogginUser" />
   </wsdl:message>
   <wsdl:message name="IChat_SendMessageToAll_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessageToAll" />
@@ -30,6 +27,18 @@
   </wsdl:message>
   <wsdl:message name="IChat_CheckUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_GetConnectionsCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectionsCount" />
+  </wsdl:message>
+  <wsdl:message name="IChat_GetConnectionsCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectionsCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IChat_GetMaxConnetionsNumber_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMaxConnetionsNumber" />
+  </wsdl:message>
+  <wsdl:message name="IChat_GetMaxConnetionsNumber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMaxConnetionsNumberResponse" />
   </wsdl:message>
   <wsdl:message name="IChat_GetMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GetMessage" />
@@ -50,11 +59,8 @@
     <wsdl:part name="parameters" element="tns:NameIsNotUnicException" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IChat">
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="Test">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChat/Test" message="tns:IChat_Test_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AddUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IChat/AddUser" message="tns:IChat_AddUser_InputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="LogginUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/LogginUser" message="tns:IChat_LogginUser_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendMessageToAll">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/SendMessageToAll" message="tns:IChat_SendMessageToAll_InputMessage" />
@@ -62,6 +68,14 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CheckUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/CheckUser" message="tns:IChat_CheckUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/CheckUserResponse" message="tns:IChat_CheckUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetConnectionsCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/GetConnectionsCount" message="tns:IChat_GetConnectionsCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/GetConnectionsCountResponse" message="tns:IChat_GetConnectionsCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMaxConnetionsNumber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/GetMaxConnetionsNumber" message="tns:IChat_GetMaxConnetionsNumber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IChat/GetMaxConnetionsNumberResponse" message="tns:IChat_GetMaxConnetionsNumber_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/GetMessage" message="tns:IChat_GetMessage_OutputCallbackMessage" />
@@ -86,14 +100,8 @@
     <wsp:PolicyReference URI="#NetTcpBinding_IChat_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="Test">
-      <soap12:operation soapAction="http://tempuri.org/IChat/Test" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="AddUser">
-      <soap12:operation soapAction="http://tempuri.org/IChat/AddUser" style="document" />
+    <wsdl:operation name="LogginUser">
+      <soap12:operation soapAction="http://tempuri.org/IChat/LogginUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -106,6 +114,24 @@
     </wsdl:operation>
     <wsdl:operation name="CheckUser">
       <soap12:operation soapAction="http://tempuri.org/IChat/CheckUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConnectionsCount">
+      <soap12:operation soapAction="http://tempuri.org/IChat/GetConnectionsCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMaxConnetionsNumber">
+      <soap12:operation soapAction="http://tempuri.org/IChat/GetMaxConnetionsNumber" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -152,9 +178,9 @@
   </wsdl:binding>
   <wsdl:service name="Server">
     <wsdl:port name="NetTcpBinding_IChat" binding="tns:NetTcpBinding_IChat">
-      <soap12:address location="net.tcp://pepsi-pc/Chat.svc" />
+      <soap12:address location="net.tcp://176.36.131.233/Chat.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://pepsi-pc/Chat.svc</wsa10:Address>
+        <wsa10:Address>net.tcp://176.36.131.233/Chat.svc</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

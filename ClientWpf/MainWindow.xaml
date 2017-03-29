@@ -7,8 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" Cursor="Arrow" Background="#FFCBF7FE">
     <Grid>
-        <Button x:Name="joinButton" Content="Join to the chat" HorizontalAlignment="Left" Height="94" Margin="246,110,0,0" VerticalAlignment="Top" Width="263" Click="button_Click" FontSize="36"/>
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="76" Margin="22,119,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="208" FontSize="36" TextChanged="textBox_TextChanged"/>
+        <Button x:Name="joinButton" Content="Join to the chat" HorizontalAlignment="Left" Height="76" Margin="246,68,0,0" VerticalAlignment="Top" Width="263" Click="button_Click" FontSize="36"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="76" Margin="10,68,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="213" FontSize="36" TextChanged="textBox_TextChanged"/>
+        <Label x:Name="ConnectionsCounterLabel" Content="Connections / Max Connections" Height="42" Margin="222,280,0.307,0" VerticalAlignment="Top" Background="White" FontSize="24"/>
+        <Label x:Name="label1" Content="Connected:" HorizontalAlignment="Left" Height="42" Margin="85,280,0,0" VerticalAlignment="Top" Width="132" Background="White" FontSize="24"/>
+        <Label x:Name="ConnectionStateLabel" Content="NaN" HorizontalAlignment="Left" Height="35" Margin="410,0,0,0" VerticalAlignment="Top" Width="99" FontSize="18" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-1.443"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.353"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="label2" Content="Connection state:" HorizontalAlignment="Left" Height="33" Margin="246,0,0,0" VerticalAlignment="Top" Width="151" FontSize="18"/>
 
     </Grid>
 </Window>

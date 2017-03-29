@@ -28,12 +28,14 @@ namespace ClientWpf
         {
             InitializeComponent();
 
-            //create connection and open proxy to use
+            //creates connection and opens proxy to use
             try
             {
                 ClientLogic logic = new ClientLogic();
                 logic.CreateConnection();
                 logic.OpenProxy();
+                UpdateConnectionsCounter();
+                UpdateConnectionState();
             }
             catch (Exception ex)
             {
@@ -44,6 +46,18 @@ namespace ClientWpf
             //Current login window is main window now.
             Application.Current.MainWindow = this;
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+        }
+
+        private void UpdateConnectionsCounter()
+        {
+            ClientLogic logic = new ClientLogic();
+            ConnectionsCounterLabel.Content = $"{logic.GetConnectionsCounter()} / {logic.GetMaxConnetionsNumber()}";
+        }
+
+        private void UpdateConnectionState()
+        {
+            ClientLogic logic = new ClientLogic();
+            ConnectionStateLabel.Content = logic.GetConnetionState();
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -73,7 +87,6 @@ namespace ClientWpf
                 MessageBox.Show(ex.StackTrace);
                 MessageBox.Show(ex.Message);
             }
-            
         }
     }
 }
