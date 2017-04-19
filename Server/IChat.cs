@@ -10,6 +10,7 @@ using System.ServiceModel;
 namespace Server
 {
     [ServiceContract(CallbackContract = typeof(IChatCallBack), SessionMode = SessionMode.Required)]
+    
     interface IChat
     {
         /// <summary>

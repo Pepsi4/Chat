@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 
 namespace Server
 {
-    
-   public interface IChatCallBack
+    public interface IChatCallBack
     {
         /// <summary>
         /// Get the message and adding it to the chat history text box.
@@ -32,6 +25,13 @@ namespace Server
         [OperationContract(IsOneWay = true)]
         void AddUserToBox(string str);
 
+        ///// <summary>
+        ///// Tells to users that the user left.
+        ///// </summary>
+        ///// <param name="name"></param>
+        //[OperationContract(IsOneWay = true)]
+        //void UserLeft(string name);
+
         /// <summary>
         /// Equivalent to MessageBox().
         /// </summary>
@@ -44,5 +44,8 @@ namespace Server
 
         [OperationContract(IsOneWay = true)]
         void NameIsNotUnicException();
+
+        [OperationContract(IsOneWay = false)]
+        bool SendPing();
     }
 }

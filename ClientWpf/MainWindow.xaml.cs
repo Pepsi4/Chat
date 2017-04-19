@@ -43,7 +43,7 @@ namespace ClientWpf
                 MessageBox.Show(ex.Message);
             }
 
-            //Current login window is main window now.
+            //The current login window is the main window now.
             Application.Current.MainWindow = this;
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
         }

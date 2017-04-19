@@ -51,6 +51,9 @@ namespace ClientWpf.ServerRef {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/NameIsNotUnicException")]
         void NameIsNotUnicException();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/SendPing", ReplyAction="http://tempuri.org/IChat/SendPingResponse")]
+        bool SendPing();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

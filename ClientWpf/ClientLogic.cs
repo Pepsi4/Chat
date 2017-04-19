@@ -173,6 +173,11 @@ namespace ClientWpf
         }
         #endregion
 
+        public bool SendPing()
+        {
+            return true;
+        }
+
         #region callback methods
 
         /// <summary>

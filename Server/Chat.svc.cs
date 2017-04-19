@@ -1,33 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using System.IO;
 using System.Threading;
 
 namespace Server
 {
-
-
     #region exceptions
-    public class CallBackIsNotUnic : Exception { }
-    public class NameIsNotUnic : Exception { }
+
+    public class CallBackIsNotUnic : Exception
+    {
+    }
+
+    public class NameIsNotUnic : Exception
+    {
+    }
+
     #endregion
 
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Server : IChat
     {
         //TODO: max connetions sets in code
-        
-        public int MaxConnections { get; set; } = 5;
-        
+        static List<Client> _users = new List<Client>();
+
+        public int MaxConnections { get; set; } = 10;
+
         public int CurrentConnections { get; set; } = 0;
 
-        static Dictionary<IChatCallBack, string> _userNames =
-        new Dictionary<IChatCallBack, string>();
+        /// <summary>
+        /// Checks the every callback if it's online. If not we should unloggin the user.
+        /// </summary>
+        public void PingUsers()
+        {
+            _users.ForEach(delegate (Client client)
+            {
+                ThreadPool.QueueUserWorkItem(s =>
+                {
+                    try
+                    {
+                        client.Callback.SendPing();
+                    }
+                    catch (Exception ex)
+                    {
+                        if (client.OthersNotified == false)
+                        {
+                            client.Online = false;
+                            SendMessage($"{client.Name} has left!");
+                            client.OthersNotified = true;
+                        }
+                    }
+                });
+            });
+        }
 
         /// <summary>
         /// Checks if the element with the key is already exists. Or any others problems with the name.
@@ -37,7 +61,7 @@ namespace Server
         public bool CheckUser(string userName)
         {
             var callback =
-            OperationContext.Current.GetCallbackChannel<IChatCallBack>();
+                OperationContext.Current.GetCallbackChannel<IChatCallBack>();
 
             if (userName == null)
             {
@@ -68,11 +92,13 @@ namespace Server
         /// <returns></returns>
         private bool IsNameUnic(string userName)
         {
-            if (_userNames.ContainsValue(userName))
+            for (int i = 0; i < _users.Count; i++)
             {
-                return false;
+                if (_users[i].Name == userName)
+                {
+                    return false;
+                }
             }
-
             return true;
         }
 
@@ -83,21 +109,29 @@ namespace Server
         /// <returns></returns>
         private bool IsCallBackUnic(IChatCallBack callback)
         {
-            if (_userNames.ContainsKey(callback))
+            for (int i = 0; i < _users.Count; i++)
             {
-                return false;
+                if (_users[i].Callback == callback)
+                {
+                    return false;
+                }
             }
-
             return true;
         }
         
-        //todo: method that checks is user online or not
         /// <summary>
         /// Deletes from the our dictionary the callback and username.
         /// </summary>
         public void UnLogginUser(IChatCallBack callback)
         {
-            _userNames.Remove(callback);
+            for (int i = 0; i < _users.Count; i++)
+            {
+                if (_users[i].Callback == callback)
+                {
+                    // Makes user offline now. 
+                    _users[i].Online = false;
+                }
+            }
             CurrentConnections--;
         }
 
@@ -120,28 +154,36 @@ namespace Server
         }
 
         /// <summary>
-        /// Tries to call on all callbacks that was registred: method GetMessage(msg) on user`s side.
+        /// Pings everyone and sends to the online users message.
         /// </summary>
         /// <param name="msg"></param>
         public void SendMessageToAll(string msg)
         {
-            IChatCallBack callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
+            PingUsers();
+            SendMessage(msg);
+        }
 
-            foreach (IChatCallBack keyValue in _userNames.Keys)
+        /// <summary>
+        /// Tries to call on all callbacks that was registred: method GetMessage(msg) on user`s side.
+        /// </summary>
+        /// <param name="msg"></param>
+        private void SendMessage(string msg)
+        {
+            _users.ForEach(delegate (Client currentClient)
             {
                 ThreadPool.QueueUserWorkItem(s =>
                 {
                     try
                     {
-                        keyValue.GetMessage(msg);
+                        currentClient.Callback.GetMessage(msg);
                     }
-                    //If we cann't to connect to the current client.
-                    catch (TimeoutException)
+                    catch (Exception)
                     {
-                        callback.ErrorMessage("Time out. Try again later.");
+                        // If we got any error -- we should make sure that client is turned offline.
+                        UnLogginUser(currentClient.Callback);
                     }
                 });
-            }
+            });
         }
 
         /// <summary>
@@ -149,38 +191,59 @@ namespace Server
         /// </summary>
         public void LogginUser(string userName)
         {
-            try
+            // Creates new class.
+            Client client = new Client();
+            // Changes the properties.
+            client.Name = userName;
+            client.Online = true;
+            client.RegTime = DateTime.Now;
+
+            // Adds to the list.
+            _users.Add(client);
+            CurrentConnections++;
+
+            //for each registred callback
+            _users.ForEach(delegate (Client currentClient)
             {
-                IChatCallBack callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
-
-                //adding to the dictionary 2 elements: callback and user name.
-                try
+                ThreadPool.QueueUserWorkItem(s =>
                 {
-                    _userNames.Add(callback, userName);
-                    CurrentConnections++;
-                }
-                catch (TimeoutException) { }
-                catch (CommunicationObjectAbortedException) { }
-
-
-                //for each registred callback
-                foreach (IChatCallBack callbacks in _userNames.Keys)
-                {
-                    ThreadPool.QueueUserWorkItem(s =>
+                    try
                     {
-                        try
-                        {
-                            //Says that the user connects to the chat
-                            callbacks.ErrorMessage($"{userName} connected to the chat!");
-                        }
-                        //if we cannot to connect to the callback
-                        catch (TimeoutException) { }
-                        catch (CommunicationObjectAbortedException) { }
-                    });
-                }
+                        currentClient.Callback.ErrorMessage($"{userName} connected to the chat!");
+                    }
+                    catch (TimeoutException)
+                    {
+                    }
+                    catch (CommunicationObjectAbortedException)
+                    {
+                    }
+                    catch (Exception)
+                    {
+                    }
+                });
+            });
+        }
+
+        /// <summary>
+        /// Client info.
+        /// </summary>
+        public class Client
+        {
+            public DateTime RegTime;
+            public string Name { get; set; }
+            public bool Online { get; set; }
+
+            /// <summary>
+            /// If the others knows that he is offline. True - they knows. False - they don't.
+            /// </summary>
+            public bool OthersNotified { get; set; }
+            public IChatCallBack Callback { get; set; }
+
+            public Client()
+            {
+                Callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
+                RegTime = DateTime.Now;
             }
-            catch (Exception) { }
         }
     }
 }
-

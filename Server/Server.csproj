@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="Web.config" />
     <None Include="Properties\PublishProfiles\wcf.pubxml" />
+    <None Include="Properties\PublishProfiles\wcf2.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

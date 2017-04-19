@@ -37,16 +37,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2016 15:09:52</publishTime>
     </File>
     <File Include="bin/Server.dll">
-      <publishTime>03/29/2017 22:15:41</publishTime>
+      <publishTime>04/20/2017 00:14:41</publishTime>
     </File>
     <File Include="Chat.svc">
-      <publishTime>02/03/2017 21:55:59</publishTime>
+      <publishTime>04/18/2017 17:21:28</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>03/23/2017 19:12:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/24/2017 23:38:47</publishTime>
+      <publishTime>04/20/2017 00:07:45</publishTime>
     </File>
   </ItemGroup>
 </Project>
