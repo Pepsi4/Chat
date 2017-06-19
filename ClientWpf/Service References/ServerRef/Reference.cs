@@ -38,7 +38,7 @@ namespace ClientWpf.ServerRef {
         void GetMessage(string str);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SendMessage")]
-        void SendMessage(string str);
+        void SendMessage(string str, string name);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/AddUserToBox")]
         void AddUserToBox(string str);

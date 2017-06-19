@@ -16,7 +16,7 @@ namespace Server
         /// </summary>
         /// <param name="msg"></param>
         [OperationContract(IsOneWay = true)]
-        void SendMessage(string str);
+        void SendMessage(string str, string name);
 
         /// <summary>
         /// Adds user to the box.
@@ -24,13 +24,6 @@ namespace Server
         /// <param name="name">User name witch added to the chat box.</param>
         [OperationContract(IsOneWay = true)]
         void AddUserToBox(string str);
-
-        ///// <summary>
-        ///// Tells to users that the user left.
-        ///// </summary>
-        ///// <param name="name"></param>
-        //[OperationContract(IsOneWay = true)]
-        //void UserLeft(string name);
 
         /// <summary>
         /// Equivalent to MessageBox().

@@ -48,12 +48,13 @@ namespace Server
         [OperationContract(IsOneWay = false)]
         int GetMaxConnetionsNumber();
 
+        /// <summary>
+        /// Const which is showing how much connections could be.
+        /// </summary>
         [DataMember]
         int MaxConnections { get; set; }
 
         [DataMember]
         int CurrentConnections { get; set; }
-        
     }
-
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Text;
 using System.Threading;
 
 namespace Server
@@ -118,7 +119,7 @@ namespace Server
             }
             return true;
         }
-        
+
         /// <summary>
         /// Deletes from the our dictionary the callback and username.
         /// </summary>
@@ -232,17 +233,26 @@ namespace Server
             public DateTime RegTime;
             public string Name { get; set; }
             public bool Online { get; set; }
+            public bool OthersNotified { get; set; }
 
             /// <summary>
-            /// If the others knows that he is offline. True - they knows. False - they don't.
+            /// If the others knows thw { get; set; }
             /// </summary>
-            public bool OthersNotified { get; set; }
             public IChatCallBack Callback { get; set; }
 
             public Client()
             {
                 Callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
                 RegTime = DateTime.Now;
+            }
+
+            public static int[] InvertValues(int[] input)
+            {
+                for (int i = 0; i < input.Length; i++)
+                {
+                    input[i] = input[i] - 2 * input[i];
+                }
+                return input;
             }
         }
     }

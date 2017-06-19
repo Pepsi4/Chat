@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace ClientWpf
 {
@@ -24,12 +12,16 @@ namespace ClientWpf
         /// </summary>
         public static bool IsOpened { get; set; } = false;
 
+        /// <summary>
+        /// The name of user.
+        /// </summary>
+        public string UserName { get; set; }
+
         public ChatWindow()
         {
             InitializeComponent();
             //refreshs the history box
             ClientLogic logic = new ClientLogic(historyBox);
-            //logic.GetMessage();
 
             Application.Current.MainWindow = this;
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
@@ -39,7 +31,7 @@ namespace ClientWpf
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
             ClientLogic logic = new ClientLogic();
-            logic.SendMessage(MessageBox.Text);
+            logic.SendMessage(MessageBox.Text, UserName);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

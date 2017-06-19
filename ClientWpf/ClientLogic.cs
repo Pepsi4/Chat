@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.ServiceModel;
 using System.Windows.Controls;
-using System.Text;
-using System.Windows.Markup;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
 using ClientWpf.ServerRef;
 using System.Threading;
 
@@ -194,11 +187,11 @@ namespace ClientWpf
         /// Sends message to all users what is current online.
         /// </summary>
         /// <param name="msg"></param>
-        public void SendMessage(string msg)
+        public void SendMessage(string msg, string name)
         {
             try
             {
-                proxy.SendMessageToAll(msg);
+                proxy.SendMessageToAll($"{name} : {msg}");
             }
             catch (Exception ex)
             {

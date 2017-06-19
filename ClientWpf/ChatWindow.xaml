@@ -14,8 +14,8 @@
         <TextBox x:Name="historyBox" HorizontalAlignment="Left" Height="198" TextWrapping="Wrap" VerticalAlignment="Top" Width="294" Margin="0,34,0,0" Grid.ColumnSpan="2"/>
         <TextBox x:Name="MessageBox" HorizontalAlignment="Left" Height="40" Margin="0,232,0,0" TextWrapping="Wrap" Text="'your message here'" VerticalAlignment="Top" Width="228" Grid.ColumnSpan="2"/>
         <Button x:Name="SendButton" Content="Send" HorizontalAlignment="Left" Height="40" Margin="148.688,232,0,0" VerticalAlignment="Top" Width="66" Click="SendButton_Click" Grid.Column="1"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="102" Margin="46.63,0,0,0" Grid.Column="1"/>
-        <Button x:Name="button" Content="UnLoggin" HorizontalAlignment="Left" Height="34" Margin="146.688,0,0,0" VerticalAlignment="Top" Width="68" Click="button_Click" Grid.Column="1"/>
+        <TextBox x:Name="UserNameBox" HorizontalAlignment="Left" Height="34" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="102" Margin="46.63,0,0,0" Grid.Column="1"/>
+        <Button x:Name="UnLoggin" Content="UnLoggin" HorizontalAlignment="Left" Height="34" Margin="146.688,0,0,0" VerticalAlignment="Top" Width="68" Click="button_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>
