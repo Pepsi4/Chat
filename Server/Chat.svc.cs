@@ -25,13 +25,24 @@ namespace Server
         static List<Client> _users = new List<Client>();
 
         public int MaxConnections { get; set; } = 10;
-
         public int CurrentConnections { get; set; } = 0;
+
+        /// <summary>
+        /// Bool var which shows if our server is pinging users or not.
+        /// </summary>
+        public bool IsPingingUsers { get; set; }
+
+        private void StartPingUsers()
+        {
+            TimerCallback timerCallBack = new TimerCallback(PingUsers);
+            Timer timer = new Timer(timerCallBack, null, 0, 1000);
+            IsPingingUsers = true;
+        }
 
         /// <summary>
         /// Checks the every callback if it's online. If not we should unloggin the user.
         /// </summary>
-        public void PingUsers()
+        public void PingUsers(object obj)
         {
             _users.ForEach(delegate (Client client)
             {
@@ -160,7 +171,6 @@ namespace Server
         /// <param name="msg"></param>
         public void SendMessageToAll(string msg)
         {
-            PingUsers();
             SendMessage(msg);
         }
 
@@ -203,6 +213,9 @@ namespace Server
             _users.Add(client);
             CurrentConnections++;
 
+            //Starts the ping process.
+            TryStartPingUsers();
+
             //for each registred callback
             _users.ForEach(delegate (Client currentClient)
             {
@@ -223,6 +236,17 @@ namespace Server
                     }
                 });
             });
+        }
+
+        /// <summary>
+        /// Trying to start to ping users if the server did not do this yet.
+        /// </summary>
+        private void TryStartPingUsers()
+        {
+            if (!IsPingingUsers)
+            {
+                StartPingUsers();
+            }
         }
 
         /// <summary>
