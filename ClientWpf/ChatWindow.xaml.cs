@@ -26,17 +26,45 @@ namespace ClientWpf
             Application.Current.MainWindow = this;
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
+            historyBox.IsReadOnly = true;
         }
 
         private void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            ClientLogic logic = new ClientLogic();
-            logic.SendMessage(MessageBox.Text, UserName);
+            SendMessage();
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void SendMessage()
         {
+            ClientLogic logic = new ClientLogic();
+            logic.SendMessage(MessageBox.Text, UserName);
+            // Clears the message box.
+            MessageBox.Text = "";
+        }
 
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                SendMessage();
+            }
+        }
+
+        private void UnLoggin_click(object sender, RoutedEventArgs e)
+        {
+            ClientLogic logic = new ClientLogic();
+            if (!MainWindow.IsOpened)
+            {
+                logic.UnLoggin();
+                logic.CloseConnection();
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+
+                ChatWindow.IsOpened = false;
+                MainWindow.IsOpened = true;
+
+                this.Close();
+            }
         }
     }
 }

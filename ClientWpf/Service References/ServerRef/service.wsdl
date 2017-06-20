@@ -40,6 +40,9 @@
   <wsdl:message name="IChat_GetMaxConnetionsNumber_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetMaxConnetionsNumberResponse" />
   </wsdl:message>
+  <wsdl:message name="IChat_UnLogginUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnLogginUser" />
+  </wsdl:message>
   <wsdl:message name="IChat_GetMessage_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GetMessage" />
   </wsdl:message>
@@ -82,6 +85,9 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMaxConnetionsNumber">
       <wsdl:input wsaw:Action="http://tempuri.org/IChat/GetMaxConnetionsNumber" message="tns:IChat_GetMaxConnetionsNumber_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/GetMaxConnetionsNumberResponse" message="tns:IChat_GetMaxConnetionsNumber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UnLogginUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChat/UnLogginUser" message="tns:IChat_UnLogginUser_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetMessage">
       <wsdl:output wsaw:Action="http://tempuri.org/IChat/GetMessage" message="tns:IChat_GetMessage_OutputCallbackMessage" />
@@ -148,6 +154,12 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnLogginUser">
+      <soap12:operation soapAction="http://tempuri.org/IChat/UnLogginUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="GetMessage">
       <soap12:operation soapAction="http://tempuri.org/IChat/GetMessage" style="document" />

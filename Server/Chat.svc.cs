@@ -106,7 +106,7 @@ namespace Server
         {
             for (int i = 0; i < _users.Count; i++)
             {
-                if (_users[i].Name == userName)
+                if (_users[i].Name == userName && _users[i].Online)
                 {
                     return false;
                 }
@@ -123,7 +123,7 @@ namespace Server
         {
             for (int i = 0; i < _users.Count; i++)
             {
-                if (_users[i].Callback == callback)
+                if (_users[i].Callback == callback && _users[i].Online)
                 {
                     return false;
                 }
@@ -134,9 +134,27 @@ namespace Server
         /// <summary>
         /// Deletes from the our dictionary the callback and username.
         /// </summary>
-        public void UnLogginUser(IChatCallBack callback)
+        public void UnLogginUser()
         {
+            var callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
+
             for (int i = 0; i < _users.Count; i++)
+            {
+                if (_users[i].Callback == callback)
+                {
+                    // Makes user offline now. 
+                    _users[i].Online = false;
+                }
+            }
+            CurrentConnections--;
+        }
+
+        /// <summary>
+        /// Use this method if you can't send IChatCallBack
+        /// </summary>
+        void UnLogginUser(IChatCallBack callback)
+        {
+            for(int i = 0; i < _users.Count; i++)
             {
                 if (_users[i].Callback == callback)
                 {
@@ -268,15 +286,6 @@ namespace Server
             {
                 Callback = OperationContext.Current.GetCallbackChannel<IChatCallBack>();
                 RegTime = DateTime.Now;
-            }
-
-            public static int[] InvertValues(int[] input)
-            {
-                for (int i = 0; i < input.Length; i++)
-                {
-                    input[i] = input[i] - 2 * input[i];
-                }
-                return input;
             }
         }
     }

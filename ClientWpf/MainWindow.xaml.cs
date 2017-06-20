@@ -10,6 +10,8 @@ namespace ClientWpf
     public partial class MainWindow : Window
     {
         public static string messageText;
+        public static bool IsOpened { get; set; } = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -66,6 +68,8 @@ namespace ClientWpf
                     chatWindow.UserName = nameBox.Text;
                     //opens the chat window
                     chatWindow.Show();
+
+                    MainWindow.IsOpened = false;
                     ChatWindow.IsOpened = true;
                     //
                     this.Close();

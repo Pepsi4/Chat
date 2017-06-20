@@ -49,6 +49,12 @@ namespace Server
         int GetMaxConnetionsNumber();
 
         /// <summary>
+        /// Use this method if you can't send IChatCallBack
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        void UnLogginUser();
+
+        /// <summary>
         /// Const which is showing how much connections could be.
         /// </summary>
         [DataMember]

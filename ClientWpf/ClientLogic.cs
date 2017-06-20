@@ -93,6 +93,14 @@ namespace ClientWpf
         }
 
         /// <summary>
+        /// Makes the user`s status from online into offline.
+        /// </summary>
+        public void UnLoggin()
+        {
+            proxy.UnLogginUser();
+        }
+
+        /// <summary>
         /// Tries to add user to the box. If the user was successful added than server will call method AddUserToBox().
         /// </summary>
         /// <param name="name">User name wich is trying to add.</param>

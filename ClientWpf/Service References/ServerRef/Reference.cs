@@ -29,6 +29,9 @@ namespace ClientWpf.ServerRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/GetMaxConnetionsNumber", ReplyAction="http://tempuri.org/IChat/GetMaxConnetionsNumberResponse")]
         int GetMaxConnetionsNumber();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/UnLogginUser")]
+        void UnLogginUser();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -102,6 +105,10 @@ namespace ClientWpf.ServerRef {
         
         public int GetMaxConnetionsNumber() {
             return base.Channel.GetMaxConnetionsNumber();
+        }
+        
+        public void UnLogginUser() {
+            base.Channel.UnLogginUser();
         }
     }
 }
