@@ -39,7 +39,7 @@ namespace ClientWpf
         private void UpdateConnectionsCounter()
         {
             ClientLogic logic = new ClientLogic();
-            ConnectionsCounterLabel.Content = $"{logic.GetConnectionsCounter()} / {logic.GetMaxConnetionsNumber()}";
+            ConnectionCounterLabel.Content = $"{logic.GetConnectionsCounter()} / {logic.GetMaxConnetionsNumber()}";
         }
 
         private void UpdateConnectionState()

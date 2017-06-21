@@ -5,13 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" Cursor="Arrow" Background="#FFCBF7FE">
+        Title="MainWindow" Height="473.213" Width="319.394" ResizeMode="NoResize" Cursor="Arrow" Background="#FFCBF7FE">
     <Grid>
-        <Button x:Name="joinButton" Content="Join to the chat" HorizontalAlignment="Left" Height="76" Margin="246,68,0,0" VerticalAlignment="Top" Width="263" Click="button_Click" FontSize="36"/>
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="76" Margin="10,68,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="213" FontSize="36" TextChanged="textBox_TextChanged"/>
-        <Label x:Name="ConnectionsCounterLabel" Content="Connections / Max Connections" Height="42" Margin="222,280,0.307,0" VerticalAlignment="Top" Background="White" FontSize="24"/>
-        <Label x:Name="label1" Content="Connected:" HorizontalAlignment="Left" Height="42" Margin="85,280,0,0" VerticalAlignment="Top" Width="132" Background="White" FontSize="24"/>
-        <Label x:Name="ConnectionStateLabel" Content="NaN" HorizontalAlignment="Left" Height="35" Margin="410,0,0,0" VerticalAlignment="Top" Width="99" FontSize="18" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
+        <Button x:Name="joinButton" Content="Join to the chat" HorizontalAlignment="Left" Height="76" Margin="10,135,0,0" VerticalAlignment="Top" Width="283" Click="button_Click" FontSize="36"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Height="58" Margin="10,63,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="283" FontSize="36" TextChanged="textBox_TextChanged"/>
+        <Label x:Name="ConnectionStateLabel" Content="NaN" HorizontalAlignment="Left" Height="35" Margin="162,1,0,0" VerticalAlignment="Top" Width="99" FontSize="18" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -21,7 +19,9 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <Label x:Name="label2" Content="Connection state:" HorizontalAlignment="Left" Height="33" Margin="246,0,0,0" VerticalAlignment="Top" Width="151" FontSize="18"/>
+        <Label x:Name="label2" Content="Connection state:" HorizontalAlignment="Left" Height="33" Margin="10,0,0,0" VerticalAlignment="Top" Width="151" FontSize="18"/>
+        <Label x:Name="ConnectionCounterLabel" Content="Label" HorizontalAlignment="Left" Height="42" Margin="126,393,0,0" VerticalAlignment="Top" Width="96" FontSize="17"/>
+        <Label x:Name="ConnectedLabel" Content="Connected :" HorizontalAlignment="Left" Height="42" Margin="25,393,0,0" VerticalAlignment="Top" Width="96" FontSize="17"/>
 
     </Grid>
 </Window>

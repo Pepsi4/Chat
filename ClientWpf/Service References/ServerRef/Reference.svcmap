@@ -24,6 +24,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="e7158458-a18b-40e1-a578-1a59ab778ca3" SourceId="1" SourceUrl="net.tcp://pepsi-pc:807/Chat.svc/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="253c7b9d-6cb0-41b2-bd60-ade3743fb2d2" SourceId="1" SourceUrl="net.tcp://pepsi-pc:807/Chat.svc/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="0c39bd6e-a4b1-4e22-9eec-de2d9616a754" SourceId="1" SourceUrl="net.tcp://pepsi-pc:807/Chat.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="dfeb0493-c357-4b73-adbe-68fd3c013405" SourceId="1" SourceUrl="net.tcp://pepsi-pc:807/Chat.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

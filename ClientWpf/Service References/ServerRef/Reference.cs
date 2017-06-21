@@ -32,6 +32,12 @@ namespace ClientWpf.ServerRef {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/UnLogginUser")]
         void UnLogginUser();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChat/GetOnlineUsers", ReplyAction="http://tempuri.org/IChat/GetOnlineUsersResponse")]
+        string[] GetOnlineUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChat/SendMessageDirectly")]
+        void SendMessageDirectly(string name, string msg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -109,6 +115,14 @@ namespace ClientWpf.ServerRef {
         
         public void UnLogginUser() {
             base.Channel.UnLogginUser();
+        }
+        
+        public string[] GetOnlineUsers() {
+            return base.Channel.GetOnlineUsers();
+        }
+        
+        public void SendMessageDirectly(string name, string msg) {
+            base.Channel.SendMessageDirectly(name, msg);
         }
     }
 }

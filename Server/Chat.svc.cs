@@ -56,7 +56,8 @@ namespace Server
                     {
                         if (client.OthersNotified == false)
                         {
-                            client.Online = false;
+                            UnLogginUser(client.Callback);
+                            CurrentConnections--;
                             SendMessage($"{client.Name} has left!");
                             client.OthersNotified = true;
                         }
@@ -146,15 +147,14 @@ namespace Server
                     _users[i].Online = false;
                 }
             }
-            CurrentConnections--;
         }
 
         /// <summary>
         /// Use this method if you can't send IChatCallBack
         /// </summary>
-        void UnLogginUser(IChatCallBack callback)
+        private void UnLogginUser(IChatCallBack callback)
         {
-            for(int i = 0; i < _users.Count; i++)
+            for (int i = 0; i < _users.Count; i++)
             {
                 if (_users[i].Callback == callback)
                 {
@@ -162,7 +162,21 @@ namespace Server
                     _users[i].Online = false;
                 }
             }
-            CurrentConnections--;
+        }
+
+        public List<string> GetOnlineUsers()
+        {
+            List<string> usersNames = new List<string>();
+
+            for (int i = 0; i < _users.Count; i++)
+            {
+                if (_users[i].Online)
+                {
+                    usersNames.Add(_users[i].Name);
+                }
+            }
+
+            return usersNames;
         }
 
         /// <summary>
@@ -209,9 +223,31 @@ namespace Server
                     catch (Exception)
                     {
                         // If we got any error -- we should make sure that client is turned offline.
-                        UnLogginUser(currentClient.Callback);
+                        //UnLogginUser(currentClient.Callback);
                     }
                 });
+            });
+        }
+
+        public void SendMessageDirectly(IChatCallBack callback, string msg)
+        {
+            _users.ForEach(delegate (Client currentClient)
+            {
+                if (currentClient.Callback == callback)
+                {
+                    currentClient.Callback.GetMessage(msg);
+                }
+            });
+        }
+
+        public void SendMessageDirectly(string name, string msg)
+        {
+            _users.ForEach(delegate (Client currentClient)
+            {
+                if (currentClient.Name == name)
+                {
+                    currentClient.Callback.GetMessage(msg);
+                }
             });
         }
 

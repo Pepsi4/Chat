@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2016 15:09:52</publishTime>
     </File>
     <File Include="bin/Server.dll">
-      <publishTime>06/20/2017 23:25:24</publishTime>
+      <publishTime>06/21/2017 23:47:49</publishTime>
     </File>
     <File Include="Chat.svc">
       <publishTime>04/20/2017 00:28:04</publishTime>

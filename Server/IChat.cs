@@ -54,6 +54,9 @@ namespace Server
         [OperationContract(IsOneWay = true)]
         void UnLogginUser();
 
+        [OperationContract(IsOneWay = false)]
+        List<string> GetOnlineUsers();
+
         /// <summary>
         /// Const which is showing how much connections could be.
         /// </summary>

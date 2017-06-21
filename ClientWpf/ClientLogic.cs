@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows;
 using ClientWpf.ServerRef;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace ClientWpf
 {
@@ -197,6 +198,15 @@ namespace ClientWpf
         /// <param name="msg"></param>
         public void SendMessage(string msg, string name)
         {
+            // Checking for commands. \\
+            if (msg == "!online" || msg == "!Online")
+            {
+                var usersNames =  proxy.GetOnlineUsers();
+                GetMessage(String.Join(" ", usersNames));
+                return;
+            }
+
+            // Sending msg.
             try
             {
                 proxy.SendMessageToAll($"{name} : {msg}");
