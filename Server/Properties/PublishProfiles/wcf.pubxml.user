@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>02/03/2017 21:41:33</publishTime>
+      <publishTime>03/02/2017 21:41:33</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>02/03/2017 21:41:33</publishTime>
+      <publishTime>03/02/2017 21:41:33</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>11/30/2016 16:07:42</publishTime>
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/06/2016 15:09:52</publishTime>
     </File>
     <File Include="bin/Server.dll">
-      <publishTime>06/21/2017 23:47:49</publishTime>
+      <publishTime>06/27/2017 23:22:56</publishTime>
     </File>
     <File Include="Chat.svc">
       <publishTime>04/20/2017 00:28:04</publishTime>
@@ -46,7 +46,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/23/2017 19:12:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/20/2017 00:07:45</publishTime>
+      <publishTime>06/27/2017 21:27:55</publishTime>
     </File>
   </ItemGroup>
 </Project>

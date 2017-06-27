@@ -14,3 +14,5 @@ C:\Users\Pepsi\documents\visual studio 2015\Projects\ClientWpf\ClientWpf\obj\Deb
 C:\Users\Pepsi\documents\visual studio 2015\Projects\ClientWpf\ClientWpf\obj\Debug\ClientWpf.exe
 C:\Users\Pepsi\documents\visual studio 2015\Projects\ClientWpf\ClientWpf\obj\Debug\ClientWpf.pdb
 C:\Users\Pepsi\Documents\Visual Studio 2015\Projects\ClientWpf\ClientWpf\obj\Debug\ClientWpf.csprojResolveAssemblyReference.cache
+C:\Users\Pepsi\Documents\Visual Studio 2015\Projects\ClientWpf\ClientWpf\obj\Debug\HelpForm.g.cs
+C:\Users\Pepsi\Documents\Visual Studio 2015\Projects\ClientWpf\ClientWpf\obj\Debug\HelpForm.baml

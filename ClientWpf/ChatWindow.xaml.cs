@@ -66,5 +66,11 @@ namespace ClientWpf
                 this.Close();
             }
         }
+
+        private void getHelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            HelpForm helpForm = new HelpForm();
+            helpForm.Show();
+        }
     }
 }

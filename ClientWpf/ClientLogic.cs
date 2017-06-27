@@ -192,19 +192,50 @@ namespace ClientWpf
             GetMessage($"{name} connected to the chat! \n");
         }
 
+        private bool CheckClientCommands(string msg, string name)
+        {
+            // Get online users command.
+            if (msg == "!online" || msg == "!Online")
+            {
+                var usersNames = proxy.GetOnlineUsers();
+                GetMessage(String.Join(" ", usersNames));
+                return true;
+            }
+
+            // Showing the help page.
+            if (msg == "!help" || msg == "!Help")
+            {
+                HelpForm helpForm = new HelpForm();
+                helpForm.Show();
+                return true;
+            }
+
+            // Direct message command.
+            if (msg.Length > 0 && msg[0] == '@')
+            {
+                // Gets the name after the @ symbol
+                string recipientName = msg.Split(' ')[0];
+                recipientName = recipientName.Remove(0, 1);
+                // Gets the message to recepient. 
+                string messageToRecipient = msg.Remove(0, recipientName.Length + 1);
+                // Sends the message.
+                proxy.SendMessageDirectly(recipientName, $"{name} to you : {messageToRecipient}");
+                GetMessage($"You to {recipientName} : {messageToRecipient}");
+                return true;
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Sends message to all users what is current online.
         /// </summary>
         /// <param name="msg"></param>
         public void SendMessage(string msg, string name)
         {
-            // Checking for commands. \\
-            if (msg == "!online" || msg == "!Online")
-            {
-                var usersNames =  proxy.GetOnlineUsers();
-                GetMessage(String.Join(" ", usersNames));
+            // Checking for potentional commands. \\
+            if (CheckClientCommands(msg,name))
                 return;
-            }
 
             // Sending msg.
             try

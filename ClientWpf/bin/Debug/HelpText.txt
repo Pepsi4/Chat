@@ -1,0 +1,5 @@
+Available commands:
+
+!help - it shows you the help page.
+!online - shows online people.
+@name message - sends the message directly.

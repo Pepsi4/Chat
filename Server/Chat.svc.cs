@@ -246,8 +246,16 @@ namespace Server
             {
                 if (currentClient.Name == name)
                 {
-                    currentClient.Callback.GetMessage(msg);
+                    ThreadPool.QueueUserWorkItem(s =>
+                    {
+                        try
+                        {
+                            currentClient.Callback.GetMessage(msg);
+                        }
+                        catch (Exception ex) { }
+                    });
                 }
+
             });
         }
 

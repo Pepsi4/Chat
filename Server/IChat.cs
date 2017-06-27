@@ -65,5 +65,8 @@ namespace Server
 
         [DataMember]
         int CurrentConnections { get; set; }
+
+        [OperationContract(IsOneWay = true)]
+        void SendMessageDirectly(string name, string msg);
     }
 }
