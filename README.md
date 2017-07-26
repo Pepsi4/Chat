@@ -18,4 +18,4 @@ If you want to globalize it, don't forget about:
   * Make sure you changed ip in config files to your own ip
   
   
-  P.S. The chat is now perfect, but it works!
+  P.S. The chat is not perfect, but it works!
